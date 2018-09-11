@@ -44,27 +44,29 @@ Article.loadAll = articleData => {
 Article.fetchAll = () => {
   $.ajax({
     url: '../data/hackerIpsum.json',
+    async: false,
     method: 'HEAD',
-    // method: 'GET',
     success: (data, message, xhr) => {
-      let headMsg = xhr.getAllResponseHeaders().split('"')[1];
+      loadData(xhr.getAllResponseHeaders().split('"')[1]);
     }
-  })
-  // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
-  if (localStorage.rawData) {
-    console.log('has storage');
-    Article.loadAll(JSON.parse(localStorage.rawData));
+  });
+}
 
+// helper function that compares the eTags. If the eTag is not the same, it will save and load from the server, otherwise it loads locally.
+function loadData(eTag){
+  // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
+  if (localStorage.eTag === eTag) { // if there is nothing in local storage, it will not load rawData
+    Article.loadAll(JSON.parse(localStorage.rawData));
   } else {
-    console.log('do not have');
     $.ajax({
       url: '../data/hackerIpsum.json',
       method: 'GET',
       success: (data) => {
         let rawData = JSON.stringify(data);
         localStorage.setItem('rawData', rawData);
+        localStorage.setItem('eTag', eTag);
         Article.loadAll(data);
       }
-    })
+    });
   }
 }
