@@ -1,22 +1,24 @@
 # Project Name
 
 **Author**: Jeffrey Weng & Jimmy Nguyen
-**Version**: 1.2.0
+**Version**: 1.2.1
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code Fellows 301 class. (i.e. What's your problem domain?) -->
-This application uses AJAX to load data from an API.
+This application uses AJAX to load data from an API to populate articles.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+git clone https://github.com/jimmyn123/06-ajax-and-json-and-wrrc
+Install node/npm
+CD in jeff-jimmy directory
+Run live-server
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+HTML, CSS, jQuery + AJAX, HightlightJS, MarkedJS
 
 ## Change Log
-<!-- Use this are to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
+09-11-2018 10:30am - Application now uses AJAX to fetch data from API.
+09-11-2018 12:00 pm - Application now updates localStorage cache correctly when API changes.
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
 
 ## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+Code Fellows for starter code, MDN for research, and Alex for rubber duck.
