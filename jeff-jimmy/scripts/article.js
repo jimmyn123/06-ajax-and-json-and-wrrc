@@ -48,6 +48,7 @@ Article.fetchAll = (callback1) => {
     method: 'HEAD',
     success: (data, message, xhr) => {
       msg = xhr.getAllResponseHeaders().split('"')[1];
+      //msg = xhr.getResponseHeader('ETag');
       callback1(msg, articleView.initMore);
     }
   })
