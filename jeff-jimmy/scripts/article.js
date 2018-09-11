@@ -44,10 +44,10 @@ Article.loadAll = articleData => {
 Article.fetchAll = () => {
   $.ajax({
     url: '../data/hackerIpsum.json',
-    async: false,
     method: 'HEAD',
     success: (data, message, xhr) => {
       loadData(xhr.getAllResponseHeaders().split('"')[1]);
+      articleView.initIndexPage();
     }
   });
 }
