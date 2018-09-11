@@ -41,23 +41,27 @@ Article.loadAll = articleData => {
 }
 
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
-Article.fetchAll = () => {
+Article.fetchAll = (callback1) => {
+  let msg;
   $.ajax({
     url: '../data/hackerIpsum.json',
-    async: false,
     method: 'HEAD',
     success: (data, message, xhr) => {
-      loadData(xhr.getAllResponseHeaders().split('"')[1]);
+      msg = xhr.getAllResponseHeaders().split('"')[1];
+      callback1(msg, articleView.initMore);
     }
-  });
+  })
 }
 
 // helper function that compares the eTags. If the eTag is not the same, it will save and load from the server, otherwise it loads locally.
-function loadData(eTag){
+Article.loadData = (eTag, callback) => {
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   if (localStorage.eTag === eTag) { // if there is nothing in local storage, it will not load rawData
+    console.log('werk');
     Article.loadAll(JSON.parse(localStorage.rawData));
+    callback();
   } else {
+    console.log('no werk');
     $.ajax({
       url: '../data/hackerIpsum.json',
       method: 'GET',
@@ -66,6 +70,7 @@ function loadData(eTag){
         localStorage.setItem('rawData', rawData);
         localStorage.setItem('eTag', eTag);
         Article.loadAll(data);
+        callback();
       }
     });
   }

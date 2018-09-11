@@ -108,10 +108,7 @@ articleView.create = () => {
 
 
 articleView.initIndexPage = () => {
-  Article.fetchAll();
-  Article.all.forEach(article => {
-    $('#articles').append(article.toHtml())
-  });
+  Article.fetchAll(Article.loadData);
 
   articleView.populateFilters();
   articleView.handleCategoryFilter();
@@ -119,3 +116,9 @@ articleView.initIndexPage = () => {
   articleView.handleMainNav();
   articleView.setTeasers();
 };
+
+articleView.initMore = () => {
+  Article.all.forEach(article => {
+    $('#articles').append(article.toHtml())
+  });
+}
