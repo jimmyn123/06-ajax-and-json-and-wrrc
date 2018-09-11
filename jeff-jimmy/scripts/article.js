@@ -47,7 +47,6 @@ Article.fetchAll = () => {
     method: 'HEAD',
     success: (data, message, xhr) => {
       loadData(xhr.getAllResponseHeaders().split('"')[1]);
-      articleView.initIndexPage();
     }
   });
 }
@@ -57,6 +56,7 @@ function loadData(eTag){
   // REVIEW: What is this 'if' statement checking for? Where was the rawData set to local storage?
   if (localStorage.eTag === eTag) { // if there is nothing in local storage, it will not load rawData
     Article.loadAll(JSON.parse(localStorage.rawData));
+    articleView.initIndexPage();
   } else {
     $.ajax({
       url: '../data/hackerIpsum.json',
@@ -66,6 +66,7 @@ function loadData(eTag){
         localStorage.setItem('rawData', rawData);
         localStorage.setItem('eTag', eTag);
         Article.loadAll(data);
+        articleView.initIndexPage();
       }
     });
   }
