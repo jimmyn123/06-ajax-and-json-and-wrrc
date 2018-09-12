@@ -43,7 +43,7 @@ Article.loadAll = articleData => {
 // REVIEW: This function will retrieve the data from either a local or remote source, and process it, then hand off control to the View.
 Article.fetchAll = () => {
   $.ajax({
-    url: '../data/hackerIpsum.json',
+    url: 'data/hackerIpsum.json',
     method: 'HEAD',
     success: (data, message, xhr) => {
       loadData(xhr.getAllResponseHeaders().split('"')[1]);
@@ -59,7 +59,7 @@ function loadData(eTag){
     articleView.initIndexPage();
   } else {
     $.ajax({
-      url: '../data/hackerIpsum.json',
+      url: 'data/hackerIpsum.json',
       method: 'GET',
       success: (data) => {
         let rawData = JSON.stringify(data);
